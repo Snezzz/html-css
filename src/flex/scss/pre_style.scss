@@ -1,0 +1,268 @@
+@mixin set_flex($flex-direction,$justify-content){
+  display: flex;
+  flex-direction: $flex-direction;
+  justify-content: $justify-content;
+}
+@mixin make_display(){
+  display: -moz-flex;
+  display: -ms-flex;
+  display: -webkit-flex;
+  display: -o-flex;
+}
+@mixin make_direction($direction_type){
+  -webkit-flex-direction: $direction_type;
+  -ms-flex-direction: $direction_type;
+}
+@mixin make_justify($justify_content){
+  -webkit-justify-content: $justify_content;
+  -ms-flex-pack: justify;
+  -moz-box-pack: justify;
+}
+@mixin make_align_content($align_content){
+  -webkit-align-content: $align_content;
+  -ms-flex-align: $align_content;
+}
+@mixin make_align_items($align){
+  -webkit-align-items: $align;
+  -ms-flex-align: $align;
+}
+@mixin set_size($width,$height){
+  width: $width;
+  height: $height
+}
+
+body{
+  background-color: rgba(157,163,114,80%);
+}
+.widget{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  @include make_display;
+  @include make_direction(row);
+  @include make_justify(center);
+
+  &__main, &__info{
+    @include set_size((50%),(52%));
+  }
+  @media (min-width: 100px) and (max-width: 586px) {
+    & {
+      flex-direction: column;
+      @include make_direction(column);
+    }
+    &__main, &__info {
+      @include set_size((100%), (52%));
+    }
+  }
+  @media screen and (min-width: 587px) and (max-width: 992px) {
+    &{
+      flex-direction: row;
+      @include make_direction(row);
+    }
+    &__main, &__info{
+      height: 767px;
+
+    }
+  }
+  @media (min-width: 993px) and (max-width: 1999px) {
+    &{
+      flex-direction: row;
+      @include make_direction(row)
+    }
+    &__main, &__info{
+      height: 767px;
+    }
+  }
+  @media (min-width: 1200px) {
+    &{
+      flex-direction: row;
+      @include make_direction(row);
+    }
+    &__main, &__info{
+      height: 767px;
+    }
+  }
+
+  &__main{
+    display: flex;
+    flex-direction: column;
+    align-content: end;
+    @include make_display;
+    @include make_direction(column);
+    @include make_align_content(flex-end);
+    background-size: cover;
+    background-image: url("../../../img/bg_pic.jpg");
+    &__icon, &__weather, &__date{
+      text-align: center;
+    }
+    &__icon{
+      @include set_size(100%,52%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      @include make_display();
+      @include make_justify(center);
+      @include make_align_items(center);
+      img{
+        width:200px;
+      }
+      @media (min-width: 100px) and (max-width: 586px)   {
+        img{
+          width: 160px;
+        }
+
+      }
+  }
+    &__weather{
+      background-color: rgba(69,53,61,89%);
+      span{
+        color: rgb(224,223,223);
+        font-size: 67px;
+        @media (min-width: 587px) and (max-width: 652px){
+          font-size: 59px;
+        }
+        @media (min-width: 100px) and (max-width: 586px) {
+          font-size: 50px;
+        }
+        @media (min-width: 100px) and (max-width: 586px)and (min-height: 20px) and (max-height: 713px){
+          font-size: 40px;
+        }
+
+      }
+    }
+    &__date{
+      background-color: rgba(134,50,57,89%);
+      span{
+        color: rgb(224,223,223);
+        font-size: 52px;
+        margin: 20px 20px 20px 20px;
+        @media (min-width: 587px) and (max-width: 652px){
+          font-size: 42px;
+        }
+        @media (min-width: 100px) and (max-width: 586px) {
+          font-size: 34px;
+        }
+        @media (min-width: 100px) and (max-width: 586px)and (min-height: 20px) and (max-height: 713px){
+          font-size: 21px;
+        }
+      }
+    }
+    &__weather, &__date{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      @include make_display();
+      @include make_justify(center);
+      @include make_align_items(center);
+      height: 24%;
+    }
+  }
+  &__info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    @include make_display();
+    @include make_direction(column);
+    @include make_align_items(center);
+    background-color: white;
+    &__body{
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      @include make_display();
+      @include make_direction(column);
+      @include make_justify(center);
+      @include set_size(70%,100%);
+      margin: 0 auto;
+    }
+    &__next-days {
+      display: flex;
+      padding-top: 6%;
+      justify-content: space-between;
+      @include make_display();
+      @include make_justify(space-between);
+      text-align: center;
+      height: 33%;
+      div {
+        &:nth-child(1) {
+          img {
+            width: 66%;
+          }
+          @media (min-width: 1200px) {
+            img {
+              width: 41%;
+            }
+          }
+        }
+        &:nth-child(2) {
+          img {
+            width: 80%;
+          }
+          @media (min-width: 1200px) {
+            img {
+              width: 48%;
+            }
+          }
+        }
+        &:nth-child(3) {
+          img {
+            width: 81%;
+          }
+          @media (min-width: 1200px) {
+            img {
+              width: 48%;
+            }
+          }
+        }
+      }
+      }
+
+    &__degree, &__graph {
+      border-bottom: 1px solid black;
+    }
+    &__degree, &__graph,&__next-days {
+      width: 100%;
+    }
+    &__degree {
+      font-family: "Malgun Gothic";
+      font-size: 107px;
+      color: rgb(119, 25, 33);
+      text-align: center;
+      @media (min-width: 100px) and (max-width: 586px) {
+        font-size: 75px;
+      }
+      @media (min-width: 586px) and (max-width: 672px){
+        font-size:92px;
+    }
+      @media (min-width: 100px) and (max-width: 586px)and (min-height: 20px) and (max-height: 713px){
+        font-size: 44px;
+      }
+    }
+    &__graph{
+      text-align: center;
+      img{
+        width:inherit;
+      }
+    }
+  }
+
+}
+.weather{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  @include make_display();
+  @include make_direction(column);
+  @include make_justify(space-around);
+  width: 30%;
+  margin-bottom: 20px;
+  &__day{
+    border-bottom: 1px solid #949494;
+  }
+  &__degree, &__day{
+    b,p{
+      color: rgb(119,25,33);
+      font-family: "Malgun Gothic";
+    }
+  }
+}
